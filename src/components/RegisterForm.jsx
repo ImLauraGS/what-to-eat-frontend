@@ -34,6 +34,7 @@ const Register = () => {
         try {
             const response = await register(formData);
             console.log("Registration successful:", response.data);
+            navigate('/');
         } catch (error) {
             if (error.response && error.response.data.validation_errors) {
                 console.error("Validation errors:", error.response.data.validation_errors);

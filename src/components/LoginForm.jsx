@@ -31,6 +31,7 @@ export default function LoginForm() {
         try {
             await login(formData);
             alert('login correcto')
+            navigate('/');
         } catch (error) {
             console.error("Error during login:", error.response.data);
         }
