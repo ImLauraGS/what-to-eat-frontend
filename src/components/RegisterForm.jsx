@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useUser } from '../context/userContext';
+import ButtonCustom from './ButtonCustom';
 
 
 const Register = () => {
@@ -9,7 +10,7 @@ const Register = () => {
         email: '',
         password: '',
         password_confirmation: '',
-        privacyPolicies: false, 
+        privacyPolicies: false,
     });
 
     const handleChange = (e) => {
@@ -27,63 +28,83 @@ const Register = () => {
             console.log("Registration successful:", response.data);
         } catch (error) {
             if (error.response && error.response.data.validation_errors) {
-                // Manejar errores de validación específicos del backend
                 console.error("Validation errors:", error.response.data.validation_errors);
             } else {
                 console.error("Error during registration:", error.response.data);
             }
         }
     };
-    
-
-    console.log(formData)
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Name"
-                required
-            />
-            <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email"
-                required
-            />
-            <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Password"
-                required
-            />
-            <input
-                type="password"
-                name="password_confirmation"
-                value={formData.password_confirmation}
-                onChange={handleChange}
-                placeholder="Confirm Password"
-                required
-            />
-            <label>
+        <form className='flex flex-col items-center' onSubmit={handleSubmit}>
+            <h1 className='text-2xl font-semibold p-5'>¡Unete a What to Eat!</h1>
+            <section className='bg-bg-dark-green w-full flex flex-col px-6 py-9 gap-5 mb-5' >
+                <label className='text-lg font-medium'>Nombre:
                 <input
-                    type="checkbox"
-                    name="privacyPolicies"
-                    checked={formData.privacyPolicies}
+                    className='w-full bg-white border rounded-lg p-2 placeholder:font-normal placeholder:text-base'
+                    type="text"
+                    name="name"
+                    value={formData.name}
                     onChange={handleChange}
+                    placeholder="Nombre"
                     required
                 />
-                Accept Privacy Policies
-            </label>
-            <button type="submit">Register</button>
+                </label>
+                <label className='text-lg font-medium'>Correo electronico:
+                <input
+                    className='w-full bg-white border rounded-lg p-2 placeholder:font-normal placeholder:text-base'
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                    required
+                />
+                </label>
+
+                <label className='text-lg font-medium'>Contraseña:
+                <input
+                    className='w-full bg-white border rounded-lg p-2 placeholder:font-normal placeholder:text-base'
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                    required
+                />
+                </label>
+                <label className='text-lg font-medium'> Repite la contraseña:
+                <input
+                    className='w-full bg-white border rounded-lg p-2 placeholder:font-normal placeholder:text-base'
+                    type="password"
+                    name="password_confirmation"
+                    value={formData.password_confirmation}
+                    onChange={handleChange}
+                    placeholder="Confirm Password"
+                    required
+                />
+                </label>
+                <label className='flex gap-3 text-lg font-medium'>
+                    <input
+                        type="checkbox"
+                        name="privacyPolicies"
+                        checked={formData.privacyPolicies}
+                        onChange={handleChange}
+                        required
+                    />
+                    Acepto la politica de privacidad.
+                </label>
+
+            </section>
+            <ButtonCustom
+                text="Register"
+                type="submit"
+            />
+
+            <p className='mt-5 text-lg'>¿Ya tienes cuenta? <a className="font-semibold text-[#6CBD98]" href="/login">Iniciar sesión</a></p>
+
         </form>
+
     );
 };
 

@@ -1,7 +1,10 @@
 import React from 'react'
+import MainHero from '../components/MainHero'
 
 export default function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <MainHero/>
+    </div>
   )
 }

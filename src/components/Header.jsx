@@ -13,7 +13,7 @@ export default function Header() {
     return (
         <>
             <header className='bg-background-green w-full p-3 flex justify-between items-center shadow-md'>
-                <img src="./logo-lg.svg" alt="logo What to Eat" />
+                <a href="/"><img src="./logo-lg.svg" alt="logo What to Eat" /></a>
                 <ul className='flex justify-end gap-2 items-center'>
                     {user && (
                         <li onClick={toggleNavbar}>
