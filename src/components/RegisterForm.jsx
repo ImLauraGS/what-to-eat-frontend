@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser } from '../context/userContext';
 import ButtonCustom from './ButtonCustom';
-
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const { register } = useUser();
@@ -12,6 +12,14 @@ const Register = () => {
         password_confirmation: '',
         privacyPolicies: false,
     });
+    const navigate = useNavigate();
+  
+    useEffect(() => {
+      const userToken = localStorage.getItem('token');
+      if (userToken) {
+        navigate('/');
+      }
+    }, []);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -57,7 +65,7 @@ const Register = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="Email"
+                    placeholder="Correo electronico"
                     required
                 />
                 </label>
@@ -69,18 +77,18 @@ const Register = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    placeholder="Password"
+                    placeholder="Contraseña"
                     required
                 />
                 </label>
-                <label className='text-lg font-medium'> Repite la contraseña:
+                <label className='text-lg font-medium'>Repite la contraseña:
                 <input
                     className='w-full bg-white border rounded-lg p-2 placeholder:font-normal placeholder:text-base'
                     type="password"
                     name="password_confirmation"
                     value={formData.password_confirmation}
                     onChange={handleChange}
-                    placeholder="Confirm Password"
+                    placeholder="Repite la contraseña"
                     required
                 />
                 </label>
@@ -101,7 +109,7 @@ const Register = () => {
                 type="submit"
             />
 
-            <p className='mt-5 text-lg'>¿Ya tienes cuenta? <a className="font-semibold text-[#6CBD98]" href="/login">Iniciar sesión</a></p>
+            <p className='mt-5 text-lg'>¿Ya tienes cuenta? <a className="font-semibold text-[#6CBD98]" href="/login">Iniciar sesión</a>.</p>
 
         </form>
 
