@@ -7,7 +7,7 @@ export const useRecipe = () => useContext(RecipeContext);
 
 export const RecipeProvider = ({ children }) => {
     const [recipes, setRecipes] = useState([]);
-    const [repice, setRecipe] = useState(null);
+    const [recipe, setRecipe] = useState(null); 
     const api = recipeApi(); 
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export const RecipeProvider = ({ children }) => {
     const addRecipe = async (data) => {
         try{
             const response = await api.createRecipe(data);
-            setRecipe(response.data.recipe);
+            setRecipe(response.data);
             return response;
         } catch (error){
             throw error;
@@ -44,7 +44,7 @@ export const RecipeProvider = ({ children }) => {
     }
 
     return (
-        <RecipeContext.Provider value={{ recipes, fetchRecipe, addRecipe }}>
+        <RecipeContext.Provider value={{ recipes, recipe, fetchRecipe, addRecipe }}>
             {children}
         </RecipeContext.Provider>
     );

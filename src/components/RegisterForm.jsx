@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '../context/userContext';
 import ButtonCustom from './ButtonCustom';
 import { useNavigate } from 'react-router-dom';
+import AlertConfirmation from './AlertConfirmation';
+
 
 const Register = () => {
     const { register } = useUser();
@@ -13,6 +15,7 @@ const Register = () => {
         privacyPolicies: false,
     });
     const navigate = useNavigate();
+    const [showAlert, setShowAlert] = useState(false);
   
     useEffect(() => {
       const userToken = localStorage.getItem('token');
@@ -33,8 +36,12 @@ const Register = () => {
         e.preventDefault();
         try {
             const response = await register(formData);
-            console.log("Registration successful:", response.data);
-            navigate('/');
+            console.log("Registration successful");
+            setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false);
+                navigate('/');
+            }, 2000); 
         } catch (error) {
             if (error.response && error.response.data.validation_errors) {
                 console.error("Validation errors:", error.response.data.validation_errors);
@@ -47,6 +54,7 @@ const Register = () => {
     return (
         <form className='flex flex-col items-center' onSubmit={handleSubmit}>
             <h1 className='text-2xl font-semibold p-5'>¡Unete a What to Eat!</h1>
+            {showAlert && <AlertConfirmation text="Registro exitoso!" status="success" />}
             <section className='bg-bg-dark-green w-full flex flex-col px-6 py-9 gap-5 mb-5' >
                 <label className='text-lg font-medium'>Nombre:
                 <input

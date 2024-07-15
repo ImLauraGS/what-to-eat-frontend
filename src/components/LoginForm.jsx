@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '../context/userContext';
 import ButtonCustom from './ButtonCustom';
 import { useNavigate } from 'react-router-dom';
+import AlertConfirmation from './AlertConfirmation';
 
 export default function LoginForm() {
     const { login } = useUser();
+    const [showAlert, setShowAlert] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -30,8 +32,11 @@ export default function LoginForm() {
         e.preventDefault();
         try {
             await login(formData);
-            alert('login correcto')
-            navigate('/');
+            setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false);
+                navigate('/');
+            }, 2000);
         } catch (error) {
             console.error("Error during login:", error.response.data);
         }
@@ -40,6 +45,7 @@ export default function LoginForm() {
     return (
         <form className='flex flex-col items-center' onSubmit={handleSubmit}>
             <h1 className='text-2xl font-semibold p-5'>Iniciar Sesion</h1>
+            {showAlert && <AlertConfirmation text="Inicio de sesión exitoso!" status="success" />}
             <section className='bg-bg-dark-green w-full flex flex-col px-6 py-9 gap-5 mb-5' >
                 <label className='text-lg font-medium'>Correo electronico:
                     <input
