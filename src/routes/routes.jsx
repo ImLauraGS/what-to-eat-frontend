@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import App from "../App";
 import Search from "../pages/Search";
+import Details from "../pages/Details";
 
 
 export const router = createBrowserRouter([
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
             {
                 path: "/search", 
                 element: <Search />,
+            },
+            {
+                path: "/recipe/:id", 
+                element: <Details />,
             },
         ],
     },

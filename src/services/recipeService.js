@@ -47,4 +47,4 @@ export const recipeApi = () => {
     };
 };
 
-export default recipeApi;  // Asegúrate de exportar el servicio por defecto
+export default recipeApi;  

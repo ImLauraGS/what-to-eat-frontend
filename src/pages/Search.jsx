@@ -1,14 +1,26 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import { IngredientsContext } from '../context/ingredientsContext';
 import { useRecipe } from '../context/recipeContext';
 import RecipeCard from '../components/RecipeCard';
+import { useUser } from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Search() {
     const { ingredients } = useContext(IngredientsContext);
+    const navigate = useNavigate();
     const { recipes } = useRecipe();
     const [selectedIngredients, setSelectedIngredients] = useState([]);
+    const { user, token } = useUser(); 
+
+    
+    useEffect(() => {
+        if (!token && !user) {
+            navigate('/login');
+        }
+    }, []);
     
 
     const handleClick = (ingredient) => {
@@ -47,9 +59,9 @@ export default function Search() {
                 </div>
 
             ))}
-            <section>
+            <section className=''>
             {selectedIngredients.length === 0 && (
-                    <p>Selecciona hasta un máximo de 6 ingredientes.</p>
+                    <p className='text-lg mb-4 mt-4 text-center'>Selecciona hasta un máximo de 6 ingredientes.</p>
                 )}
                 {selectedIngredients.length > 0 && (
                     <>
@@ -59,7 +71,7 @@ export default function Search() {
                                 <RecipeCard title={recipe.title} description={recipe.description} id={recipe.id} key={recipe.id} />
                             ))
                         ) : (
-                            <p>No se encontraron recetas que coincidan con los ingredientes seleccionados.</p>
+                            <p className='text-lg mb-4 mt-4'>No se encontraron recetas que coincidan con los ingredientes seleccionados.</p>
                         )}
                     </>
                 )}
