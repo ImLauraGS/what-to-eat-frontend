@@ -48,10 +48,21 @@ export default function Search() {
 
             ))}
             <section>
-                <h2 className='text-2xl border-b-2 border-green-btn mb-4'>Resultados de la busqueda:</h2>
-                {filteredRecipes.map((recipe) => (
-                       <RecipeCard title={recipe.title} description={recipe.description} id={recipe.id} key={recipe.id}/>
-                    ))}
+            {selectedIngredients.length === 0 && (
+                    <p>Selecciona hasta un máximo de 6 ingredientes.</p>
+                )}
+                {selectedIngredients.length > 0 && (
+                    <>
+                        <h2 className='text-2xl border-b-2 border-green-btn mb-4'>Resultados de la búsqueda:</h2>
+                        {filteredRecipes.length > 0 ? (
+                            filteredRecipes.map((recipe) => (
+                                <RecipeCard title={recipe.title} description={recipe.description} id={recipe.id} key={recipe.id} />
+                            ))
+                        ) : (
+                            <p>No se encontraron recetas que coincidan con los ingredientes seleccionados.</p>
+                        )}
+                    </>
+                )}
             </section>
         </div>
     );
