@@ -41,9 +41,17 @@ export const recipeApi = () => {
         }
     };
 
+    const createRecipe = async (recipeData) => {
+        const response = await api.post('/add', recipeData);
+        return response.data;
+    };
+
+
+
     return {
         getRecipes,
         getRecipe,
+        createRecipe
     };
 };
 
