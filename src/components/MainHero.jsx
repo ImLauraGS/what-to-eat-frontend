@@ -33,7 +33,7 @@ export default function MainHero() {
                 
             </div>
 
-            <div className='absolute top-24 -z-10'>
+            <div className='sticky -mt-40 -z-10'>
                 <img src="./heroimg.jpeg" alt="hortalizas en tabla de cortar" />
             </div>
 
