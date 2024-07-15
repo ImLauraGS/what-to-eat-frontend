@@ -106,7 +106,7 @@ const Register = () => {
 
             </section>
             <ButtonCustom
-                text="Register"
+                text="Registrate"
                 type="submit"
             />
 
