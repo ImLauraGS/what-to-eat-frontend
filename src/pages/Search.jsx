@@ -1,20 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import { IngredientsContext } from '../context/ingredientsContext';
 import { useRecipe } from '../context/recipeContext';
+import RecipeCard from '../components/RecipeCard';
 
 export default function Search() {
     const { ingredients } = useContext(IngredientsContext);
     const { recipes } = useRecipe();
+    const [selectedIngredients, setSelectedIngredients] = useState([]);
     
 
     const handleClick = (ingredient) => {
-        console.log(ingredient);
+        if (selectedIngredients.length < 6 && !selectedIngredients.includes(ingredient)) {
+            setSelectedIngredients([...selectedIngredients, ingredient]);
+        }
     };
 
-    console.log(recipes)
-
+    const filteredRecipes = recipes.filter((recipe) => {
+        const titleMatch = selectedIngredients.every((ingredient) =>
+            recipe.title.toLowerCase().includes(ingredient.toLowerCase())
+        );
+        const descriptionMatch = selectedIngredients.every((ingredient) =>
+            recipe.description.toLowerCase().includes(ingredient.toLowerCase())
+        );
+        return titleMatch || descriptionMatch;
+    });
 
     return (
         <div className='flex flex-col gap-5 p-5'>
@@ -37,16 +48,10 @@ export default function Search() {
 
             ))}
             <section>
-                <h2 className='text-2xl border-b-2 border-green-btn mb-4'>Recipe List</h2>
-                <ul>
-                    {recipes.map((recipe) => (
-                        <li key={recipe.id}>
-                            <h3>{recipe.title}</h3>
-                            <p>{recipe.description}</p>
-                            {/* Aquí puedes mostrar más detalles de la receta */}
-                        </li>
+                <h2 className='text-2xl border-b-2 border-green-btn mb-4'>Resultados de la busqueda:</h2>
+                {filteredRecipes.map((recipe) => (
+                       <RecipeCard title={recipe.title} description={recipe.description} id={recipe.id} key={recipe.id}/>
                     ))}
-                </ul>
             </section>
         </div>
     );
