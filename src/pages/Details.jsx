@@ -35,14 +35,12 @@ export default function Details() {
             setShowAlert(true);
             setTimeout(() => {
                 setShowAlert(false);
+                window.location.reload();
             }, 2000);
         } catch (error) {
             console.error('Error adding recipe to favorites:', error);
         }
     };
-
-    console.log(recipe.id)
-    console.log(favorites)
 
     return (
         <section className='p-5 flex flex-col gap-4'>

@@ -23,8 +23,10 @@ export default function Search() {
         }
       }, []);
 
-    const handleClick = (ingredient) => {
-        if (selectedIngredients.length < 6 && !selectedIngredients.includes(ingredient)) {
+      const handleClick = (ingredient) => {
+        if (selectedIngredients.includes(ingredient)) {
+            setSelectedIngredients(selectedIngredients.filter(item => item !== ingredient));
+        } else if (selectedIngredients.length < 6) {
             setSelectedIngredients([...selectedIngredients, ingredient]);
         }
     };
@@ -66,6 +68,18 @@ export default function Search() {
                 {selectedIngredients.length > 0 && (
                     <>
                         <h2 className='text-2xl border-b-2 border-green-btn mb-4'>Resultados de la búsqueda:</h2>
+                        <p>Ingredientes selecionados:</p>
+                        {selectedIngredients.map((ingredient) => (
+                            <Chip
+                                key={ingredient}
+                                label={ingredient.charAt(0).toUpperCase() + ingredient.slice(1)}
+                                variant="outlined"
+                                onClick={() => handleClick(ingredient)}
+                                style={{ margin: '4px' }}
+                                
+                            />
+                        ))}
+
                         {filteredRecipes.length > 0 ? (
                             filteredRecipes.map((recipe) => (
                                 <RecipeCard title={recipe.title} description={recipe.description} id={recipe.id} key={recipe.id} />
