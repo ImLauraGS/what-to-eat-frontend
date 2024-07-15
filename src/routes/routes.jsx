@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import App from "../App";
+import Search from "../pages/Search";
 
 
 export const router = createBrowserRouter([
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
             {
                 path: "/register", 
                 element: <Register />,
+            },
+            {
+                path: "/search", 
+                element: <Search />,
             },
         ],
     },

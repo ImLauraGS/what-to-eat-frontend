@@ -1,0 +1,59 @@
+{
+ 
+      "carnes": [
+        "pollo",
+        "res",
+        "cerdo",
+        "cordero",
+        "pavo",
+        "pato"
+      ],
+      "vegetales": [
+        "zanahoria",
+        "papa",
+        "tomate",
+        "lechuga",
+        "pepino",
+        "espinaca",
+        "brocoli",
+        "coliflor"
+      ],
+      "frutas": [
+        "manzana",
+        "banana",
+        "naranja",
+        "fresa",
+        "mango",
+        "piña",
+        "uva",
+        "pera"
+      ],
+      "granos": [
+        "arroz",
+        "quinoa",
+        "trigo",
+        "maíz",
+        "avena",
+        "cebada",
+        "centeno"
+      ],
+      "lacteos": [
+        "leche",
+        "queso",
+        "yogur",
+        "mantequilla",
+        "crema"
+      ],
+      "otros": [
+        "aceite de oliva",
+        "sal",
+        "pimienta",
+        "azúcar",
+        "miel",
+        "vinagre",
+        "ajo",
+        "cebolla"
+      ]
+
+  }
+  

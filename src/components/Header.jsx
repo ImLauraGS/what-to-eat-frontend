@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import { useUser } from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
     const { user } = useUser();
+    const navigate = useNavigate();
     const [navbarVisible, setNavbarVisible] = useState(false);
 
     const toggleNavbar = () => {
         setNavbarVisible(!navbarVisible);
+    };
+
+    const handleButtonClick = () => {
+          navigate('/search') 
     };
 
     return (
@@ -16,7 +22,7 @@ export default function Header() {
                 <a href="/"><img src="./logo-lg.svg" alt="logo What to Eat" /></a>
                 <ul className='flex justify-end gap-2 items-center'>
                     {user && (
-                        <li onClick={toggleNavbar}>
+                        <li onClick={handleButtonClick}>
                             <img src="/subway_search.svg" alt="Search" />
                         </li>
                     )}
