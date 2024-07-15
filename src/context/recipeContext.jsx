@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import recipeApi from '../services/recipeService'; // Importa recipeApi correctamente
+import recipeApi from '../services/recipeService';
 
 const RecipeContext = createContext();
 
@@ -8,6 +8,8 @@ export const useRecipe = () => useContext(RecipeContext);
 export const RecipeProvider = ({ children }) => {
     const [recipes, setRecipes] = useState([]);
     const [recipe, setRecipe] = useState(null); 
+    const [favorites, setFavorites] = useState([]); 
+    const [favoritesLoaded, setFavoritesLoaded] = useState(false);
     const api = recipeApi(); 
 
     useEffect(() => {
@@ -34,17 +36,50 @@ export const RecipeProvider = ({ children }) => {
     };
 
     const addRecipe = async (data) => {
-        try{
+        try {
             const response = await api.createRecipe(data);
             setRecipe(response.data);
             return response;
-        } catch (error){
+        } catch (error) {
             throw error;
         }
-    }
+    };
+
+    const addFavorites = async (recipeId) => {
+        try {
+            const response = await api.addFavorites(recipeId); 
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    useEffect(() => {
+        const fetchFavorites = async () => {
+            const user = localStorage.getItem('user'); 
+            if (user) {
+                const userId = JSON.parse(user).id;
+                try {
+                    const data = await api.getFavorites(userId);
+                    setFavorites(data.favorites || []);
+                    setFavoritesLoaded(true);
+                } catch (error) {
+                    console.error(`Error fetching favorites for user ${userId}:`, error);
+                }
+            }
+        };
+
+        if (!favoritesLoaded) {
+            fetchFavorites();
+        }
+    }, [favoritesLoaded, api]);
+
+    const isFavorite = (recipeId) => {
+        return favorites.some(favorite => favorite.recipe_id === recipeId);
+    };
 
     return (
-        <RecipeContext.Provider value={{ recipes, recipe, fetchRecipe, addRecipe }}>
+        <RecipeContext.Provider value={{ recipes, recipe, favorites,isFavorite, addFavorites, fetchRecipe, addRecipe }}>
             {children}
         </RecipeContext.Provider>
     );

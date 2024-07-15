@@ -46,13 +46,33 @@ export const recipeApi = () => {
         return response.data;
     };
 
+    const addFavorites = async (recipeId) => {
+        try {
+            const response = await api.post(`/recipe/${recipeId}`);
+            return response.data;
+        } catch (error) {
+            console.error(`Error adding recipe ${recipeId} to favorites:`, error);
+            throw error;
+        }
+    };
 
+    const getFavorites = async (userId) => {
+        try {
+            const response = await api.get(`/favorites/${userId}`);
+            return response.data; 
+        } catch (error) {
+            console.error(`Error fetching favorites for user ${userId}:`, error);
+            throw error;
+        }
+    };
 
     return {
         getRecipes,
         getRecipe,
-        createRecipe
+        createRecipe,
+        addFavorites,
+        getFavorites
     };
 };
 
-export default recipeApi;  
+export default recipeApi;

@@ -32,7 +32,8 @@ export default function AddRecipe() {
             setShowAlert(true);
             setTimeout(() => {
                 setShowAlert(false);
-                navigate('/home');
+                navigate('/');
+                
             }, 2000);
         } catch (error) {
             console.error("Error al añadir receta:", error);
@@ -109,8 +110,6 @@ export default function AddRecipe() {
                     text="Añadir receta"
                     type="submit"
                 />
-
-                <p className='mt-5 text-lg'>¿Ya tienes cuenta? <a className="font-semibold text-[#6CBD98]" href="/login">Iniciar sesión</a>.</p>
 
             </form>
         </section>

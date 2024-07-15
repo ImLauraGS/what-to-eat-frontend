@@ -17,11 +17,11 @@ export default function Search() {
 
     
     useEffect(() => {
-        if (!token && !user) {
-            navigate('/login');
+        const userData = JSON.parse(localStorage.getItem('user'));
+        if (!userData) {
+          navigate('/login');
         }
-    }, []);
-    
+      }, []);
 
     const handleClick = (ingredient) => {
         if (selectedIngredients.length < 6 && !selectedIngredients.includes(ingredient)) {
@@ -41,6 +41,9 @@ export default function Search() {
 
     return (
         <div className='flex flex-col gap-5 p-5'>
+            {selectedIngredients.length === 0 && (
+                    <p className='text-lg mb-4 mt-4 text-center'>Selecciona hasta un máximo de 6 ingredientes.</p>
+                )}
            {Object.keys(ingredients).map((category, index) => (
                 <div key={index}>
                     <h3 className='text-xl border-b-2 border-green-btn mb-4'>{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
@@ -60,9 +63,6 @@ export default function Search() {
 
             ))}
             <section className=''>
-            {selectedIngredients.length === 0 && (
-                    <p className='text-lg mb-4 mt-4 text-center'>Selecciona hasta un máximo de 6 ingredientes.</p>
-                )}
                 {selectedIngredients.length > 0 && (
                     <>
                         <h2 className='text-2xl border-b-2 border-green-btn mb-4'>Resultados de la búsqueda:</h2>
