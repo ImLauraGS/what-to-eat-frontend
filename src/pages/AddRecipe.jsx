@@ -37,9 +37,10 @@ export default function AddRecipe() {
             const response = await addRecipe(formData);
             console.log("Receta añadida");
             setShowAlert(true);
+            window.scrollTo(0, 0);
             setTimeout(() => {
                 setShowAlert(false);
-                navigate('/');
+                navigate('/favorites');
                 window.location.reload();
             }, 2000);
         } catch (error) {

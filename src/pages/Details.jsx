@@ -9,6 +9,7 @@ export default function Details() {
     const { fetchRecipe, addFavorites, isFavorite, deleteRecipe } = useRecipe();
     const [recipe, setRecipe] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -40,10 +41,12 @@ export default function Details() {
     const handleAddToFavorites = async () => {
         try {
             await addFavorites(id);
+            setAlertMessage('Receta añadida a favoritos');
             setShowAlert(true);
+            window.scrollTo(0, 0); 
             setTimeout(() => {
                 setShowAlert(false);
-                window.location.reload();
+                setAlertMessage('');
             }, 2000);
         } catch (error) {
             console.error('Error adding recipe to favorites:', error);
@@ -57,7 +60,15 @@ export default function Details() {
     const handleDeleteRecipe = async () => {
         try {
             await deleteRecipe(id);
-            navigate('/favorites'); 
+            setAlertMessage('Receta eliminada correctamente');
+            setShowAlert(true);
+            window.scrollTo(0, 0); 
+            setTimeout(() => {
+                setShowAlert(false);
+                setAlertMessage('');
+                navigate('/favorites'); 
+                window.location.reload();
+            }, 2000); 
         } catch (error) {
             console.error('Error deleting recipe:', error);
         }
@@ -65,7 +76,7 @@ export default function Details() {
 
     return (
         <section className='p-5 flex flex-col gap-4'>
-            {showAlert && <AlertConfirmation text="Receta añadida a favoritos" status="success" />}
+            {showAlert && <AlertConfirmation text={alertMessage} status="success" />}
             <h1 className='text-3xl text-center font-bold'>{recipe.title}</h1>
             <div className='bg-bg-dark-green px-4 py-7'>
                 <p className='text-lg mb-4 font-semibold'>Ingredientes y cantidades</p>
@@ -103,4 +114,3 @@ export default function Details() {
         </section>
     );
 }
-

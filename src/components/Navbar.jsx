@@ -9,7 +9,7 @@ export default function Navbar() {
   const handleLogoutClick = async () => {
     try {
       await logout();
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       console.error("Error during logout:", error);
     }

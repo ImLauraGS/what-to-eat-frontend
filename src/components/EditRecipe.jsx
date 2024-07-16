@@ -5,7 +5,7 @@ import AlertConfirmation from '../components/AlertConfirmation';
 import ButtonCustom from '../components/ButtonCustom';
 
 export default function EditRecipe() {
-    const { id } = useParams(); // Obtener el ID de la receta desde la URL
+    const { id } = useParams();
     const { updateRecipe, fetchRecipe } = useRecipe();
     const [showAlert, setShowAlert] = useState(false);
     const [formData, setFormData] = useState({
@@ -27,7 +27,7 @@ export default function EditRecipe() {
     useEffect(() => {
         const fetchRecipeDetails = async () => {
             try {
-                const recipeDetails = await fetchRecipe(id); // Obtener los detalles de la receta actual
+                const recipeDetails = await fetchRecipe(id); 
                 setFormData({
                     title: recipeDetails.title,
                     ingredients: recipeDetails.ingredients,
@@ -54,12 +54,13 @@ export default function EditRecipe() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await updateRecipe(id, formData); // Llama a updateRecipe con el ID y los datos actualizados
+            const response = await updateRecipe(id, formData); 
             console.log("Receta actualizada");
             setShowAlert(true);
+            window.scrollTo(0, 0);
             setTimeout(() => {
                 setShowAlert(false);
-                navigate('/');
+                navigate('/favorites');
                 window.location.reload();
             }, 2000);
         } catch (error) {

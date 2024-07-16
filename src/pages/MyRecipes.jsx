@@ -63,8 +63,8 @@ export default function MyRecipes() {
                 </Tabs>
             </Box>
             {value === 'favorites' && (
-                <div>
-                    <h2 className='text-xl font-semibold p-5 text-center'>Mis recetas favoritas</h2>
+                <div className='p-5 flex flex-col gap-4'>
+                    <h2 className='text-xl font-semibold text-center'>Mis recetas favoritas</h2>
                     <div>
                         {favoriteRecipes.length > 0 ? (
                             favoriteRecipes.map((recipe) => (
@@ -82,8 +82,8 @@ export default function MyRecipes() {
                 </div>
             )}
             {value === 'myrecipes' && (
-                <div>
-                    <h2 className='text-xl font-semibold p-5 text-center'>Mis recetas</h2>
+                <div className='p-5 flex flex-col gap-4'>
+                    <h2 className='text-xl font-semibold text-center'>Mis recetas</h2>
                     <div>
                         {userRecipes.length > 0 ? (
                             userRecipes.map((recipe) => (
