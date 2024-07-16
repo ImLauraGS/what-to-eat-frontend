@@ -21,7 +21,7 @@ export default function Navbar() {
         {user ? (
           <>
             <li className='w-full p-4 bg-background-green border-b-4 border-primary-color'><a href="/add">Añadir receta</a></li>
-            <li className='w-full p-4 bg-background-green border-b-4 border-primary-color'><a href="/my-recipes">Mis recetas</a></li>
+            <li className='w-full p-4 bg-background-green border-b-4 border-primary-color'><a href="/favorites">Mis recetas</a></li>
             <li className='w-full p-4 bg-background-green border-b-4 border-primary-color'>
               <a href="#" onClick={handleLogoutClick}>Cerrar sesión</a>
             </li>

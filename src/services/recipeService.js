@@ -66,12 +66,23 @@ export const recipeApi = () => {
         }
     };
 
+    const getUserRecipes = async () => {
+        try {
+            const response = await api.get('/my-recipes');
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching user recipes:', error);
+            throw error;
+        }
+    };
+
     return {
         getRecipes,
         getRecipe,
         createRecipe,
         addFavorites,
-        getFavorites
+        getFavorites,
+        getUserRecipes
     };
 };
 

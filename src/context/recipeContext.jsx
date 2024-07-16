@@ -10,6 +10,7 @@ export const RecipeProvider = ({ children }) => {
     const [recipe, setRecipe] = useState(null); 
     const [favorites, setFavorites] = useState([]); 
     const [favoritesLoaded, setFavoritesLoaded] = useState(false);
+    const [userRecipes, setUserRecipes] = useState([]); 
     const api = recipeApi(); 
 
     useEffect(() => {
@@ -72,14 +73,37 @@ export const RecipeProvider = ({ children }) => {
         if (!favoritesLoaded) {
             fetchFavorites();
         }
-    }, [favoritesLoaded, api]);
+    }, []);
+
+    useEffect(() => {
+        const fetchUserRecipes = async () => {
+            try {
+                const data = await api.getUserRecipes();
+                setUserRecipes(data);
+            } catch (error) {
+                console.error('Error fetching user recipes:', error);
+            }
+        };
+
+        fetchUserRecipes();
+    }, []);
+
 
     const isFavorite = (recipeId) => {
         return favorites.some(favorite => favorite.recipe_id === recipeId);
     };
 
     return (
-        <RecipeContext.Provider value={{ recipes, recipe, favorites,isFavorite, addFavorites, fetchRecipe, addRecipe }}>
+        <RecipeContext.Provider value={{ 
+            recipes, 
+            recipe, 
+            favorites,
+            userRecipes, 
+            isFavorite, 
+            addFavorites, 
+            fetchRecipe, 
+            addRecipe 
+        }}>
             {children}
         </RecipeContext.Provider>
     );

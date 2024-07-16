@@ -8,6 +8,7 @@ import App from "../App";
 import Search from "../pages/Search";
 import Details from "../pages/Details";
 import AddRecipe from "../pages/AddRecipe";
+import MyRecipes from "../pages/MyRecipes";
 
 
 export const router = createBrowserRouter([
@@ -39,6 +40,11 @@ export const router = createBrowserRouter([
                 path: "/add", 
                 element: <AddRecipe />,
             },
+            {
+                path: "/favorites", 
+                element: <MyRecipes />,
+            },
+
         ],
     },
 ]);
