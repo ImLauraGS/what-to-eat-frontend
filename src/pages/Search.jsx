@@ -13,17 +13,17 @@ export default function Search() {
     const navigate = useNavigate();
     const { recipes } = useRecipe();
     const [selectedIngredients, setSelectedIngredients] = useState([]);
-    const { user, token } = useUser(); 
+    const { user, token } = useUser();
 
-    
+
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem('user'));
         if (!userData) {
-          navigate('/login');
+            navigate('/login');
         }
-      }, []);
+    }, []);
 
-      const handleClick = (ingredient) => {
+    const handleClick = (ingredient) => {
         if (selectedIngredients.includes(ingredient)) {
             setSelectedIngredients(selectedIngredients.filter(item => item !== ingredient));
         } else if (selectedIngredients.length < 6) {
@@ -44,20 +44,29 @@ export default function Search() {
     return (
         <div className='flex flex-col gap-5 p-5'>
             {selectedIngredients.length === 0 && (
-                    <p className='text-lg mb-4 mt-4 text-center'>Selecciona hasta un máximo de 6 ingredientes.</p>
-                )}
-           {Object.keys(ingredients).map((category, index) => (
+                <p className='text-lg mb-4 mt-4 text-center'>Selecciona hasta un máximo de 6 ingredientes.</p>
+            )}
+            {Object.keys(ingredients).map((category, index) => (
                 <div key={index}>
                     <h3 className='text-xl border-b-2 border-green-btn mb-4'>{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
-                    <Stack direction="row" spacing={1} flexWrap="wrap">
+                    <Stack direction="row"
+                        justifyContent="space-around"
+                        alignItems="center"
+                        spacing={1} flexWrap="wrap">
                         {ingredients[category].map((ingredient) => (
                             <Chip
                                 key={ingredient}
                                 label={ingredient.charAt(0).toUpperCase() + ingredient.slice(1)}
                                 variant="outlined"
                                 onClick={() => handleClick(ingredient)}
-                                style={{ margin: '4px' }}
-                                
+                                style={{ margin: '0.4rem', padding: '1rem' }}
+                                sx={{
+                                    fontSize: '1rem',
+                                    borderColor: '#6CBD98',
+                                    borderWidth: '2px',
+
+                                }}
+
                             />
                         ))}
                     </Stack>
@@ -75,8 +84,15 @@ export default function Search() {
                                 label={ingredient.charAt(0).toUpperCase() + ingredient.slice(1)}
                                 variant="outlined"
                                 onClick={() => handleClick(ingredient)}
-                                style={{ margin: '4px' }}
-                                
+                                style={{ margin: '0.4rem', padding: '1rem' }}
+                                sx={{
+                                    margin: '4px',
+                                    fontSize: '1rem',
+                                    borderColor: '#6CBD98',
+                                    borderWidth: '2px',
+
+                                }}
+
                             />
                         ))}
 

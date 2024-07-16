@@ -76,13 +76,34 @@ export const recipeApi = () => {
         }
     };
 
+    const updateRecipe = async (recipeId, recipeData) =>{
+        try {
+            const response = await api.put(`/recipe/${recipeId}`,recipeData);
+            return response.data;
+        } catch (error) {
+            console.error(`Error updating recipe ${recipeId}:`, error);
+            throw error;
+        }
+    }
+    const deleteRecipe = async (recipeId) => {
+        try {
+            const response = await api.delete(`/recipe/${recipeId}`);
+            return response.data;
+        } catch (error) {
+            console.error(`Error deleting recipe ${recipeId}:`, error);
+            throw error;
+        }
+    };
+
     return {
         getRecipes,
         getRecipe,
         createRecipe,
         addFavorites,
         getFavorites,
-        getUserRecipes
+        getUserRecipes,
+        updateRecipe,
+        deleteRecipe
     };
 };
 

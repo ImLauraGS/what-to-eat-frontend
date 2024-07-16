@@ -55,7 +55,7 @@ const Register = () => {
         <form className='flex flex-col items-center' onSubmit={handleSubmit}>
             <h1 className='text-2xl font-semibold p-5'>¡Unete a What to Eat!</h1>
             {showAlert && <AlertConfirmation text="Registro exitoso!" status="success" />}
-            <section className='bg-bg-dark-green w-full flex flex-col px-6 py-9 gap-5 mb-5' >
+            <section className='bg-bg-dark-green w-full flex flex-col px-6 py-10 gap-5 mb-5' >
                 <label className='text-lg font-medium'>Nombre:
                 <input
                     className='w-full bg-white border rounded-lg p-2 placeholder:font-normal placeholder:text-base'

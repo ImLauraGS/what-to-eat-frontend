@@ -55,6 +55,26 @@ export const RecipeProvider = ({ children }) => {
         }
     };
 
+    const updateRecipe = async (recipeId, recipeData) => {
+        try {
+            const response = await api.updateRecipe(recipeId, recipeData);
+            setRecipe(response); 
+            return response;
+        } catch (error) {
+            console.error(`Error updating recipe ${recipeId}:`, error);
+            throw error;
+        }
+    };
+    const deleteRecipe = async (recipeId) => {
+        try {
+            const response = await api.deleteRecipe(recipeId);
+            return response;
+        } catch (error) {
+            console.error(`Error deleting recipe ${recipeId}:`, error);
+            throw error;
+        }
+    };
+
     useEffect(() => {
         const fetchFavorites = async () => {
             const user = localStorage.getItem('user'); 
@@ -102,7 +122,9 @@ export const RecipeProvider = ({ children }) => {
             isFavorite, 
             addFavorites, 
             fetchRecipe, 
-            addRecipe 
+            addRecipe,
+            updateRecipe,
+            deleteRecipe
         }}>
             {children}
         </RecipeContext.Provider>

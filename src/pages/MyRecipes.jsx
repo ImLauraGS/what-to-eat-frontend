@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRecipe } from '../context/recipeContext';
+import { useNavigate } from 'react-router-dom';
 import RecipeCard from '../components/RecipeCard';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -9,6 +10,14 @@ export default function MyRecipes() {
     const { favorites, fetchRecipe, userRecipes } = useRecipe();
     const [favoriteRecipes, setFavoriteRecipes] = React.useState([]);
     const [value, setValue] = React.useState('favorites');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const userData = JSON.parse(localStorage.getItem('user'));
+        if (!userData) {
+          navigate('/login');
+        }
+      }, []);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -36,6 +45,18 @@ export default function MyRecipes() {
                     indicatorColor="secondary"
                     aria-label="secondary tabs example"
                     variant="fullWidth"
+                    sx={{
+                        '& .MuiTab-root': {
+                            fontSize: '1rem', 
+                            fontWeight: 'bold', 
+                            '&.Mui-selected': {
+                                color: '#6CBD98', 
+                            },
+                        },
+                        '& .MuiTabs-indicator': {
+                            backgroundColor: '#6CBD98', 
+                        },
+                    }}
                 >
                     <Tab value="favorites" label="Mis favoritas" />
                     <Tab value="myrecipes" label="Mis recetas" />
@@ -43,7 +64,7 @@ export default function MyRecipes() {
             </Box>
             {value === 'favorites' && (
                 <div>
-                    <h2>Mis Recetas Favoritas</h2>
+                    <h2 className='text-xl font-semibold p-5 text-center'>Mis recetas favoritas</h2>
                     <div>
                         {favoriteRecipes.length > 0 ? (
                             favoriteRecipes.map((recipe) => (
@@ -62,7 +83,7 @@ export default function MyRecipes() {
             )}
             {value === 'myrecipes' && (
                 <div>
-                    <h2>Mis Recetas</h2>
+                    <h2 className='text-xl font-semibold p-5 text-center'>Mis recetas</h2>
                     <div>
                         {userRecipes.length > 0 ? (
                             userRecipes.map((recipe) => (

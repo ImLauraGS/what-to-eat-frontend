@@ -9,6 +9,7 @@ import Search from "../pages/Search";
 import Details from "../pages/Details";
 import AddRecipe from "../pages/AddRecipe";
 import MyRecipes from "../pages/MyRecipes";
+import EditRecipe from "../components/EditRecipe";
 
 
 export const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
             {
                 path: "/favorites", 
                 element: <MyRecipes />,
+            },
+            {
+                path: "/edit/recipe/:id", 
+                element: <EditRecipe />,
             },
 
         ],

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useRecipe } from '../context/recipeContext';
-import ButtonCustom from '../components/ButtonCustom';
-import { useNavigate } from 'react-router-dom';
 import AlertConfirmation from '../components/AlertConfirmation';
+import ButtonCustom from '../components/ButtonCustom';
 
-export default function AddRecipe() {
-    const { addRecipe } = useRecipe();
+export default function EditRecipe() {
+    const { id } = useParams(); // Obtener el ID de la receta desde la URL
+    const { updateRecipe, fetchRecipe } = useRecipe();
     const [showAlert, setShowAlert] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
@@ -19,9 +20,28 @@ export default function AddRecipe() {
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem('user'));
         if (!userData) {
-          navigate('/login');
+            navigate('/login');
         }
-      }, []);
+    }, [navigate]);
+
+    useEffect(() => {
+        const fetchRecipeDetails = async () => {
+            try {
+                const recipeDetails = await fetchRecipe(id); // Obtener los detalles de la receta actual
+                setFormData({
+                    title: recipeDetails.title,
+                    ingredients: recipeDetails.ingredients,
+                    description: recipeDetails.description,
+                    tiktok: recipeDetails.tiktok,
+                    youtube: recipeDetails.youtube,
+                });
+            } catch (error) {
+                console.error('Error fetching recipe details:', error);
+            }
+        };
+
+        fetchRecipeDetails();
+    }, [id, fetchRecipe]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,8 +54,8 @@ export default function AddRecipe() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await addRecipe(formData);
-            console.log("Receta añadida");
+            const response = await updateRecipe(id, formData); // Llama a updateRecipe con el ID y los datos actualizados
+            console.log("Receta actualizada");
             setShowAlert(true);
             setTimeout(() => {
                 setShowAlert(false);
@@ -43,17 +63,16 @@ export default function AddRecipe() {
                 window.location.reload();
             }, 2000);
         } catch (error) {
-            console.error("Error al añadir receta:", error);
-        
+            console.error("Error al actualizar receta:", error);
         }
     };
 
     return (
         <section>
-            <h1 className='text-2xl font-semibold p-5 text-center'>Añadir receta</h1>
-            {showAlert && <AlertConfirmation text="La receta se ha añadido correctamente" status="success" />}
+            <h1 className='text-2xl font-semibold p-5 text-center'>Editar receta</h1>
+            {showAlert && <AlertConfirmation text="La receta se ha actualizado correctamente" status="success" />}
             <form className='flex flex-col items-center' onSubmit={handleSubmit}>
-                <section className='bg-bg-dark-green w-full flex flex-col px-6 py-10 gap-9 mb-9' >
+                <section className='bg-bg-dark-green w-full flex flex-col px-6 py-10 gap-9 mb-9'>
                     <label className='text-lg font-medium'>Título de receta:
                         <input
                             className='w-full bg-white border rounded-lg p-2 placeholder:font-normal placeholder:text-base'
@@ -67,7 +86,7 @@ export default function AddRecipe() {
                     </label>
                     <label className='text-lg font-medium'>Ingredientes y cantidades:
                         <input
-                            className='w-full bg-white border rounded-lg  h-60 p-2 placeholder:font-normal placeholder:text-base'
+                            className='w-full bg-white border rounded-lg h-60 p-2 placeholder:font-normal placeholder:text-base'
                             type="text"
                             name="ingredients"
                             value={formData.ingredients}
@@ -114,7 +133,7 @@ export default function AddRecipe() {
                     </label>
                 </section>
                 <ButtonCustom
-                    text="Añadir receta"
+                    text="Actualizar receta"
                     type="submit"
                 />
             </form>
