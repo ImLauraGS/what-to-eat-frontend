@@ -80,10 +80,10 @@ export default function Details() {
             <h1 className='text-3xl text-center font-bold'>{recipe.title}</h1>
             <div className='bg-bg-dark-green px-4 py-7'>
                 <p className='text-lg mb-4 font-semibold'>Ingredientes y cantidades</p>
-                <p>{recipe.ingredients}</p>
+                <p className='text-lg mt-4 whitespace-pre-line'>{recipe.ingredients}</p>
             </div>
             <div>
-                <p className='text-lg mt-4'>{recipe.description}</p>
+                <p className='text-lg mt-4 whitespace-pre-line'>{recipe.description}</p>
             </div>
 
             <ul className='flex flex-col gap-2'>
