@@ -67,7 +67,7 @@ export default function AddRecipe() {
                         />
                     </label>
                     <label className='text-lg font-medium'>Ingredientes y cantidades:
-                        <input
+                        <textarea
                             className='w-full bg-white border rounded-lg  h-60 p-2 placeholder:font-normal placeholder:text-base'
                             type="text"
                             name="ingredients"
@@ -79,7 +79,7 @@ export default function AddRecipe() {
                     </label>
 
                     <label className='text-lg font-medium'>Descripción e instrucciones:
-                        <input
+                        <textarea
                             className='w-full bg-white h-60 border rounded-lg p-2 placeholder:font-normal placeholder:text-base'
                             type="text"
                             name="description"
