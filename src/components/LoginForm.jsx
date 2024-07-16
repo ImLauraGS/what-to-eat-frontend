@@ -36,6 +36,7 @@ export default function LoginForm() {
             setTimeout(() => {
                 setShowAlert(false);
                 navigate('/');
+                window.location.reload();
             }, 2000);
         } catch (error) {
             console.error("Error during login:", error.response.data);

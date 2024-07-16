@@ -90,9 +90,9 @@ export const RecipeProvider = ({ children }) => {
             }
         };
 
-        if (!favoritesLoaded) {
+        
             fetchFavorites();
-        }
+
     }, []);
 
     useEffect(() => {

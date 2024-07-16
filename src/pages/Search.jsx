@@ -39,17 +39,17 @@ export default function Search() {
     };
 
     const filteredRecipes = recipes.filter((recipe) => {
-        const normalizedTitle = normalizeString(recipe.title);
+        const normalizedIngredients = normalizeString(recipe.ingredients);
         const normalizedDescription = normalizeString(recipe.description);
         
-        const titleMatch = selectedIngredients.every((ingredient) =>
-            normalizedTitle.includes(normalizeString(ingredient))
+        const ingredientsMatch = selectedIngredients.every((ingredient) =>
+            normalizedIngredients.includes(normalizeString(ingredient))
         );
         const descriptionMatch = selectedIngredients.every((ingredient) =>
             normalizedDescription.includes(normalizeString(ingredient))
         );
         
-        return titleMatch || descriptionMatch;
+        return ingredientsMatch || descriptionMatch;
     });
 
     return (

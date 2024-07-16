@@ -1,15 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useUser } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
+import AlertConfirmation from './AlertConfirmation';
 
 export default function Navbar() {
   const { user, logout } = useUser(); 
   const navigate = useNavigate(); 
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleLogoutClick = async () => {
     try {
       await logout();
-      navigate('/');
+      setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false);
+                navigate('/');
+                window.location.reload();
+            }, 2000);
     } catch (error) {
       console.error("Error during logout:", error);
     }
@@ -33,6 +40,7 @@ export default function Navbar() {
           </>
         )}
       </ul>
+      {showAlert && <AlertConfirmation text="Se ha cerrado la sesion correctamente." status="success" />}
     </nav>
   );
 }
