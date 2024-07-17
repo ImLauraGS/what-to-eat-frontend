@@ -38,9 +38,11 @@ const Register = () => {
             const response = await register(formData);
             console.log("Registration successful");
             setShowAlert(true);
+            window.scrollTo(0, 0);
             setTimeout(() => {
                 setShowAlert(false);
                 navigate('/');
+                window.location.reload();
             }, 2000); 
         } catch (error) {
             if (error.response && error.response.data.validation_errors) {
