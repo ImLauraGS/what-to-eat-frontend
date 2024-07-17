@@ -9,6 +9,9 @@ El proyecto de recetas está siendo desarrollado como parte del curso en IT Acad
 
 Este repositorio va unido al repositiorio de back: [Aqui](https://github.com/ImLauraGS/what-to-eat-backend)
 
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=lacMfXvW_Uk" frameborder="0" allowfullscreen></iframe>
+
+
 ## 💻 Tecnologias usadas
 
 - React: 18.2.0
@@ -60,6 +63,8 @@ Recipe project that, based on selected ingredients, suggests a series of recipes
 The recipe project is being developed as part of the IT Academy course at Barcelona Activa. It utilizes modern technologies in both frontend and backend to provide an interactive platform where users can search for recipes, add new recipes, and manage their favorites. The frontend is built with React using Vite as the bundler, Axios for backend communication, and styled primarily with Tailwind CSS, supplemented by some Material UI components. On the other hand, the backend is developed in Laravel, following the MVC pattern and providing a Restful API to manage recipe operations. Comprehensive testing was conducted using PHPUnit to ensure the quality and reliability of the endpoints. The project also includes an initial design in Figma for mobile views, with plans to expand to a desktop version in the future.
 
 This repository is linked to the backend repository: [Here](https://github.com/ImLauraGS/what-to-eat-backend)
+
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=lacMfXvW_Uk" frameborder="0" allowfullscreen></iframe>
 
 ## 💻 Technologies Used
 
