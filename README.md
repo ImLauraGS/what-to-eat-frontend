@@ -9,7 +9,7 @@ El proyecto de recetas está siendo desarrollado como parte del curso en IT Acad
 
 Este repositorio va unido al repositiorio de back: [Aqui](https://github.com/ImLauraGS/what-to-eat-backend)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/lacMfXvW_Uk" frameborder="0" allowfullscreen></iframe>
+[![Watch the video](https://img.youtube.com/vi/lacMfXvW_Uk/maxresdefault.jpg)](https://www.youtube.com/watch?v=lacMfXvW_Uk)
 
 
 ## 💻 Tecnologias usadas
@@ -64,7 +64,7 @@ The recipe project is being developed as part of the IT Academy course at Barcel
 
 This repository is linked to the backend repository: [Here](https://github.com/ImLauraGS/what-to-eat-backend)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/lacMfXvW_Uk" frameborder="0" allowfullscreen></iframe>
+[![Watch the video](https://img.youtube.com/vi/lacMfXvW_Uk/maxresdefault.jpg)](https://www.youtube.com/watch?v=lacMfXvW_Uk)
 
 ## 💻 Technologies Used
 
