@@ -90,10 +90,10 @@ export default function Search() {
                     </AccordionDetails>
                 </Accordion>
             ))}
-            <section className=''>
+            <section className='mt-10'>
                 {selectedIngredients.length > 0 && (
                     <>
-                        <h2 className='text-2xl border-b-2 border-green-btn mb-4'>Resultados de la búsqueda:</h2>
+                        <h2 className='text-2xl border-b-2 border-green-btn mb-8'>Resultados de la búsqueda:</h2>
                         <p>Ingredientes seleccionados:</p>
                         {selectedIngredients.map((ingredient) => (
                             <Chip
@@ -103,7 +103,6 @@ export default function Search() {
                                 onClick={() => handleClick(ingredient)}
                                 style={{ margin: '0.4rem', padding: '1rem' }}
                                 sx={{
-                                    margin: '4px',
                                     fontSize: '1rem',
                                     borderColor: '#6CBD98',
                                     borderWidth: '2px',
@@ -116,7 +115,7 @@ export default function Search() {
                                 <RecipeCard title={recipe.title} description={recipe.description} id={recipe.id} key={recipe.id} />
                             ))
                         ) : (
-                            <p className='text-lg mb-4 mt-4'>No se encontraron recetas que coincidan con los ingredientes seleccionados.</p>
+                            <p className='text-lg mb-4 mt-6'>No se encontraron recetas que coincidan con los ingredientes seleccionados.</p>
                         )}
                     </>
                 )}
